@@ -4,7 +4,7 @@ import { useContext, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 import { AppContext } from "../../context/AppContext";
-import SideImage from "../../components/ui/auth/SideImage";
+import SideImage from "../../components/auth/SideImage";
 import Input from "../../components/ui/form/Input";
 
 const Login = () => {
