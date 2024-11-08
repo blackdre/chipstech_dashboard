@@ -74,33 +74,12 @@ const Login = () => {
                       placeholder='Password'
                       ref={passwordRef}
                     />
-                    <Col lg={12} className='d-flex justify-content-between'>
-                      <div className='form-check mb-3'>
-                        <input
-                          type='checkbox'
-                          className='form-check-input'
-                          id='customCheck1'
-                        />
-                        <label
-                          className='form-check-label'
-                          htmlFor='customCheck1'>
-                          Remember Me
-                        </label>
-                      </div>
-                      <Link to='reset-password'>Forgot Password?</Link>
-                    </Col>
                   </Row>
-                  <div className='d-flex justify-content-center'>
+                  <div className='d-flex justify-content-center mt-4'>
                     <Button type='submit' className='btn btn-primary'>
                       Sign In
                     </Button>
                   </div>
-                  <p className='mt-3 text-center'>
-                    Don’t have an account?{" "}
-                    <Link to='/register' className='text-underline'>
-                      Click here to sign up.
-                    </Link>
-                  </p>
                 </Form>
               </div>
             </Card>

@@ -3,6 +3,7 @@ import MainLayout from "./components/layouts/MainLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Login from "./pages/auth/Login";
+import "./App.css";
 
 const App = () => {
   return (
