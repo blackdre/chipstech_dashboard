@@ -1,7 +1,7 @@
 import { Container, Row } from "react-bootstrap";
-import Aside from "../components/ui/Aside";
-import Header from "../components/ui/Header";
-import Navbar from "../components/ui/Navbar";
+import Aside from "../ui/Aside";
+import Header from "../ui/Header";
+import Navbar from "../ui/Navbar";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 

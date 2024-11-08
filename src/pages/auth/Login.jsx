@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 import { AppContext } from "../../context/AppContext";
 import SideImage from "../../components/auth/SideImage";
-import Input from "../../components/ui/form/Input";
+import Input from "../../components/form/Input";
 
 const Login = () => {
   const emailRef = useRef(null);
