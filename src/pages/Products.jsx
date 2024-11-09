@@ -1,5 +1,10 @@
 import { BiSolidEdit, BiTrash } from "react-icons/bi";
 import { useProducts } from "../context/ProductProvider";
+import {
+  BsFillHandThumbsDownFill,
+  BsFillHandThumbsUpFill,
+} from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const { products, loading, deleteProduct } = useProducts();
@@ -10,7 +15,7 @@ const Products = () => {
         <div className='card'>
           <div className='card-header d-flex justify-content-between'>
             <div className='header-title'>
-              <h4 className='card-title'>Basic Table</h4>
+              <h4 className='card-title'>Products Table</h4>
             </div>
           </div>
           <div className='card-body p-0'>
@@ -45,9 +50,13 @@ const Products = () => {
                       <td>
                         <div className='text-info'>
                           {product.is_active ? (
-                            <h6 className='text-success'>available</h6>
+                            <h6 className='text-success'>
+                              Available <BsFillHandThumbsUpFill />{" "}
+                            </h6>
                           ) : (
-                            <h6 className='text-danger'>No stock</h6>
+                            <h6 className='text-danger'>
+                              No stock <BsFillHandThumbsDownFill />
+                            </h6>
                           )}
                         </div>
                       </td>
