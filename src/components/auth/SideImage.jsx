@@ -12,6 +12,7 @@ const SideImage = () => {
         src={bgImage}
         className='img-fluid gradient-main animated-scaleX'
         alt='images'
+        style={{ minHeight: "100%" }}
       />
     </Col>
   );
