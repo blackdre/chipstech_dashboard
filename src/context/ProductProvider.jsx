@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { supabase } from "../supabase/client";
 import { useAuth } from "./AuthProvider";
@@ -119,6 +119,10 @@ export const ProductsProvider = ({ children }) => {
       }
     }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <ProductsContext.Provider

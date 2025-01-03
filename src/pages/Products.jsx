@@ -6,11 +6,15 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductModal from "../components/ui/ProductModal";
 
 const Products = () => {
-  const { products, loading, deleteProduct } = useProducts();
+  const { products, fetchProducts, loading } = useProducts();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
