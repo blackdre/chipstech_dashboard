@@ -3,7 +3,13 @@ import { AppContext } from "../../context/AppContext";
 import { FaArrowRight, FaRectangleList } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import { BsBadgeTmFill, BsCartPlusFill, BsFilePdfFill } from "react-icons/bs";
+import {
+  BsBadgeTmFill,
+  BsCartPlusFill,
+  BsFilePdfFill,
+  BsTable,
+  BsTablet,
+} from "react-icons/bs";
 
 const Aside = () => {
   const { appName, logo } = useContext(AppContext);
@@ -79,11 +85,11 @@ const Aside = () => {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link ' to={"products"}>
+              <Link className='nav-link ' to={"categories"}>
                 <i className='icon'>
-                  <BsFilePdfFill />
+                  <BsTable />
                 </i>
-                <span className='item-name'>Quotations</span>
+                <span className='item-name'>Categories</span>
               </Link>
             </li>
             <li className='nav-item'>

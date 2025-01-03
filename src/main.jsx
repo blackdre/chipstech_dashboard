@@ -7,14 +7,17 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter } from "react-router-dom";
 import { AppProvider } from "./context/AppContext.jsx";
 import { ProductsProvider } from "./context/ProductProvider.jsx";
+import { CategoriesProvider } from "./context/CategoriesProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AppProvider>
-        <ProductsProvider>
-          <App />
-        </ProductsProvider>
+        <CategoriesProvider>
+          <ProductsProvider>
+            <App />
+          </ProductsProvider>
+        </CategoriesProvider>
       </AppProvider>
     </BrowserRouter>
   </StrictMode>

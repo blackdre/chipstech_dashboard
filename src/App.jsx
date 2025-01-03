@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login";
 import "./App.css";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
+import Categories from "./pages/Categories";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Products />} />
           <Route path='/single-product' element={<SingleProduct />} />
+          <Route path='/categories' element={<Categories />} />
         </Route>
 
         <Route element={<AuthLayout />}>

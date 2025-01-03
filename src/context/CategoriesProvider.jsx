@@ -1,8 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "../supabase/client";
 
-c;
-
 const CategoriesContext = createContext();
 
 export const useCategories = () => {
