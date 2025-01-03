@@ -8,14 +8,10 @@ const Header = () => {
           <div className='col-md-12'>
             <div className='flex-wrap d-flex justify-content-between align-items-center'>
               <div>
-                <h1>Hello Devs!</h1>
-                <p>
-                  We are on a mission to help developers like you build
-                  successful projects for FREE.
-                </p>
+                <h1>Hello Tongai!</h1>
               </div>
               <div>
-                <a href='' className='btn btn-link btn-soft-light'>
+                {/* <a href='' className='btn btn-link btn-soft-light'>
                   <svg
                     className='icon-20'
                     width='20'
@@ -31,7 +27,7 @@ const Header = () => {
                       fill='currentColor'></path>
                   </svg>
                   Announcements
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

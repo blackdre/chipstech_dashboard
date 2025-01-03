@@ -1,27 +1,15 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import {
-  FaArrowRight,
-  FaRectangleList,
-  FaUserPlus,
-  FaUsers,
-} from "react-icons/fa6";
+import { FaArrowRight, FaRectangleList } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import { BiSolidUserAccount } from "react-icons/bi";
-import {
-  BsBadgeTm,
-  BsBadgeTmFill,
-  BsCartPlusFill,
-  BsCreditCard2BackFill,
-  BsFilePdfFill,
-} from "react-icons/bs";
+import { BsBadgeTmFill, BsCartPlusFill, BsFilePdfFill } from "react-icons/bs";
 
 const Aside = () => {
   const { appName, logo } = useContext(AppContext);
 
   return (
-    <aside className='sidebar sidebar-default sidebar-light sidebar-base navs-rounded-all '>
+    <aside className='sidebar sidebar-transparent sidebar-light sidebar-base navs-rounded-all '>
       <div className='sidebar-header d-flex align-items-center justify-content-start'>
         <Link to={"/dashboard"} className='navbar-brand'>
           {/* <!--Logo start--> */}
