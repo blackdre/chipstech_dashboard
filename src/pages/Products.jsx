@@ -11,15 +11,10 @@ import ProductModal from "../components/ui/ProductModal";
 
 const Products = () => {
   const { products, fetchProducts, loading } = useProducts();
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(products);
   return (
     <>
       <div className='row'>

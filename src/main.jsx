@@ -8,17 +8,20 @@ import { BrowserRouter } from "react-router-dom";
 import { AppProvider } from "./context/AppContext.jsx";
 import { ProductsProvider } from "./context/ProductProvider.jsx";
 import { CategoriesProvider } from "./context/CategoriesProvider.jsx";
+import AuthProvider from "./context/AuthProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <AppProvider>
-        <CategoriesProvider>
-          <ProductsProvider>
-            <App />
-          </ProductsProvider>
-        </CategoriesProvider>
-      </AppProvider>
+      <AuthProvider>
+        <AppProvider>
+          <CategoriesProvider>
+            <ProductsProvider>
+              <App />
+            </ProductsProvider>
+          </CategoriesProvider>
+        </AppProvider>
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 );

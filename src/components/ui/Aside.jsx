@@ -3,13 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import { FaArrowRight, FaRectangleList } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import {
-  BsBadgeTmFill,
-  BsCartPlusFill,
-  BsFilePdfFill,
-  BsTable,
-  BsTablet,
-} from "react-icons/bs";
+import { BsBadgeTmFill, BsCartPlusFill, BsTable } from "react-icons/bs";
 
 const Aside = () => {
   const { appName, logo } = useContext(AppContext);
@@ -48,7 +42,7 @@ const Aside = () => {
               <Link
                 className='nav-link static-item disabled'
                 href='#'
-                tabindex='-1'>
+                tabIndex='-1'>
                 <span className='default-icon'>Home</span>
                 <span className='mini-icon'>-</span>
               </Link>
