@@ -15,6 +15,10 @@ const Products = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <div className='row'>

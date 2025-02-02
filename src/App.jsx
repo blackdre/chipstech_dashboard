@@ -7,6 +7,7 @@ import "./App.css";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Categories from "./pages/Categories";
+import BrandForm from "./pages/BrandForm";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/products' element={<Products />} />
           <Route path='/single-product/:id' element={<SingleProduct />} />
           <Route path='/categories' element={<Categories />} />
+          <Route path='/brand-form' element={<BrandForm />} />
         </Route>
 
         <Route element={<AuthLayout />}>
