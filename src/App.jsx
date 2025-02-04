@@ -9,6 +9,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Categories from "./pages/Categories";
 import BrandForm from "./pages/BrandForm";
 import ProductForm from "./pages/ProductForm";
+import Brands from "./pages/Brands";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/single-product/:id' element={<SingleProduct />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/brand-form' element={<BrandForm />} />
+          <Route path='/brands' element={<Brands />} />
         </Route>
 
         <Route element={<AuthLayout />}>

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "../supabase/client";
+import { useAuth } from "./AuthProvider";
 
 const CategoriesContext = createContext();
 
@@ -10,6 +11,7 @@ export const useCategories = () => {
 export const CategoriesProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchCategories();
@@ -27,34 +29,40 @@ export const CategoriesProvider = ({ children }) => {
   };
 
   const addCategory = async (category) => {
-    const { data, error } = await supabase
-      .from("categories")
-      .insert([category]);
-    if (error) {
-      console.error("Error adding category:", error);
-    } else {
-      setCategories([...categories, data[0]]);
+    if (user) {
+      const { data, error } = await supabase
+        .from("categories")
+        .insert([category]);
+      if (error) {
+        console.error("Error adding category:", error);
+      } else {
+        setCategories([...categories, data[0]]);
+      }
     }
   };
 
   const updateCategory = async (id, updatedCategory) => {
-    const { data, error } = await supabase
-      .from("categories")
-      .update(updatedCategory)
-      .eq("id", id);
-    if (error) {
-      console.error("Error updating category:", error);
-    } else {
-      setCategories(categories.map((cat) => (cat.id === id ? data[0] : cat)));
+    if (user) {
+      const { data, error } = await supabase
+        .from("categories")
+        .update(updatedCategory)
+        .eq("id", id);
+      if (error) {
+        console.error("Error updating category:", error);
+      } else {
+        setCategories(categories.map((cat) => (cat.id === id ? data[0] : cat)));
+      }
     }
   };
 
   const deleteCategory = async (id) => {
-    const { error } = await supabase.from("categories").delete().eq("id", id);
-    if (error) {
-      console.error("Error deleting category:", error);
-    } else {
-      setCategories(categories.filter((cat) => cat.id !== id));
+    if (user) {
+      const { error } = await supabase.from("categories").delete().eq("id", id);
+      if (error) {
+        console.error("Error deleting category:", error);
+      } else {
+        setCategories(categories.filter((cat) => cat.id !== id));
+      }
     }
   };
 
