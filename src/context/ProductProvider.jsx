@@ -6,139 +6,82 @@ import { useAuth } from "./AuthProvider";
 const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  // Fetch all products
-  const fetchProducts = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .order("created_at", { ascending: false });
+  const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    fetchProducts();
+    fetchBrands();
+    fetchCategories();
+  }, []);
+
+  const fetchProducts = async () => {
+    const { data, error } = await supabase.from("products").select("*");
     if (error) {
       toast.error("Error fetching products");
     } else {
       setProducts(data);
     }
-    setLoading(false);
   };
 
-  // Create a product
-  const createProduct = async (product, imageFile) => {
-    if (user) {
-      try {
-        setLoading(true);
+  const fetchBrands = async () => {
+    const { data, error } = await supabase.from("brands").select("brand_name");
+    if (!error) setBrands(data);
+  };
 
-        // Upload image if provided
-        let imageUrl = null;
-        if (imageFile) {
-          const fileName = `${Date.now()}_${imageFile.name}`;
-          const { data: uploadData, error: uploadError } =
-            await supabase.storage
-              .from("product-images")
-              .upload(fileName, imageFile);
+  const fetchCategories = async () => {
+    const { data, error } = await supabase.from("categories").select("name");
+    if (!error) setCategories(data);
+  };
 
-          if (uploadError) throw uploadError;
-          imageUrl = `${supabase.storageUrl}/product-images/${fileName}`;
-        }
-
-        // Insert product
-        const { data, error } = await supabase
-          .from("products")
-          .insert([{ ...product, image_url: imageUrl }]);
-
-        if (error) throw error;
-
-        setProducts((prev) => [data[0], ...prev]);
-        toast.success("Product created successfully");
-      } catch (error) {
-        toast.error(error.message || "Error creating product");
-      } finally {
-        setLoading(false);
+  const addProduct = async (product) => {
+    let imageUrl = null;
+    if (product.image) {
+      const filePath = `${Date.now()}-${product.image.name}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("products")
+        .upload(filePath, product.image);
+      if (uploadError) {
+        toast.error("Image upload failed");
+        return;
       }
+      imageUrl = `${supabase.supabaseUrl}/storage/v1/object/public/products/${filePath}`;
+    }
+
+    const { data: newProduct, error } = await supabase
+      .from("products")
+      .insert([
+        {
+          name: product.name,
+          description: product.description,
+          image_url: imageUrl,
+          price: product.price,
+          quantity: product.quantity,
+          brand: product.brand,
+          category_name: product.category_name,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Insert Error:", error);
+      toast.error("Error adding product");
+    } else {
+      setProducts((prev) => [...prev, newProduct]);
+      toast.success("Product added successfully");
     }
   };
-
-  // Update a product
-  const updateProduct = async (id, updatedProduct, imageFile) => {
-    if (user) {
-      try {
-        setLoading(true);
-
-        // Upload new image if provided
-        let imageUrl = updatedProduct.image_url;
-        if (imageFile) {
-          const fileName = `${Date.now()}_${imageFile.name}`;
-          const { data: uploadData, error: uploadError } =
-            await supabase.storage
-              .from("product-images")
-              .upload(fileName, imageFile);
-
-          if (uploadError) throw uploadError;
-          imageUrl = `${supabase.storageUrl}/product-images/${fileName}`;
-        }
-
-        // Update product
-        const { data, error } = await supabase
-          .from("products")
-          .update({ ...updatedProduct, image_url: imageUrl })
-          .eq("id", id);
-
-        if (error) throw error;
-
-        setProducts((prev) =>
-          prev.map((product) => (product.id === id ? data[0] : product))
-        );
-        toast.success("Product updated successfully");
-      } catch (error) {
-        toast.error(error.message || "Error updating product");
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
-
-  // Delete a product
-  const deleteProduct = async (id) => {
-    if (user) {
-      try {
-        setLoading(true);
-        const { error } = await supabase.from("products").delete().eq("id", id);
-
-        if (error) throw error;
-
-        setProducts((prev) => prev.filter((product) => product.id !== id));
-        toast.success("Product deleted successfully");
-      } catch (error) {
-        toast.error(error.message || "Error deleting product");
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <ProductsContext.Provider
-      value={{
-        products,
-        loading,
-        fetchProducts,
-        createProduct,
-        updateProduct,
-        deleteProduct,
-      }}>
+      value={{ products, brands, categories, addProduct }}>
       {children}
     </ProductsContext.Provider>
   );
 };
 
-export const useProducts = () => {
-  return useContext(ProductsContext);
-};
+export const useProducts = () => useContext(ProductsContext);
