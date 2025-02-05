@@ -4,7 +4,8 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import BrandForm from "./BrandForm";
 
 const Brands = () => {
-  const { brands } = useBrands();
+  const { brands, deleteBrand } = useBrands();
+
   return (
     <Row>
       <Col md={6} className='mx-auto'>
@@ -33,7 +34,8 @@ const Brands = () => {
                   <span className='m-1'></span>
                   <a
                     href='javascript:void(0);'
-                    className='btn btn-outline-danger rounded-circle btn-icon btn-sm p-2'>
+                    className='btn btn-outline-danger rounded-circle btn-icon btn-sm p-2'
+                    onClick={() => deleteBrand(brand.id)}>
                     <span className='btn-inner'>
                       <FaTrashAlt />
                     </span>
