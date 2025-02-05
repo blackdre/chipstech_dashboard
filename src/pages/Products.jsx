@@ -5,16 +5,10 @@ import {
   BsFillHandThumbsUpFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import ProductModal from "../components/ui/ProductModal";
+import { Button } from "react-bootstrap";
 
 const Products = () => {
-  const { products, fetchProducts, loading } = useProducts();
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { products, loading, deleteProduct } = useProducts();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -29,11 +23,10 @@ const Products = () => {
                 <h4 className='card-title'>Products Table</h4>
               </div>
               <div>
-                <Button
-                  variant='danger'
-                  style={{ color: "black" }}
-                  onClick={handleShow}>
-                  Add New Product
+                <Button>
+                  <Link to='/add-product' style={{ color: "black" }}>
+                    Add New Product
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -83,8 +76,11 @@ const Products = () => {
                         </td>
                         <td>
                           <h6 className='text-primary'>
-                            <BiSolidEdit />
-                            <BiTrash />
+                            <Button
+                              variant='outline-danger'
+                              onClick={() => deleteProduct(product.id)}>
+                              <BiTrash />
+                            </Button>
                           </h6>
                         </td>
                       </tr>
@@ -96,9 +92,6 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose} size='lg'>
-        <ProductModal close={handleClose} />
-      </Modal>
     </>
   );
 };

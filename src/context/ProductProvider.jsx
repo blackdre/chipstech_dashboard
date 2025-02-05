@@ -91,9 +91,33 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    if (user) {
+      const { error } = await supabase
+        .from("products")
+        .delete()
+        .eq("id", productId);
+      if (error) {
+        toast.error("Error deleting product");
+      } else {
+        setProducts((prev) =>
+          prev.filter((product) => product.id !== productId)
+        );
+        toast.success("Product deleted successfully");
+      }
+    }
+  };
+
   return (
     <ProductsContext.Provider
-      value={{ products, brands, categories, addProduct, getProductById }}>
+      value={{
+        products,
+        brands,
+        categories,
+        addProduct,
+        deleteProduct,
+        getProductById,
+      }}>
       {children}
     </ProductsContext.Provider>
   );
