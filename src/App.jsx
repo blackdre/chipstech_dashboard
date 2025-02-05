@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
-import Home from "./pages/Home";
+
 import AuthLayout from "./components/layouts/AuthLayout";
 import Login from "./pages/auth/Login";
 import "./App.css";
@@ -16,7 +16,7 @@ const App = () => {
     <>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Products />} />
           <Route path='/add-product' element={<ProductForm />} />
           <Route path='/products' element={<Products />} />
           <Route path='/single-product/:id' element={<SingleProduct />} />

@@ -49,7 +49,7 @@ const Aside = () => {
             </li>
             <Nav.Item className='nav-item'>
               <Link
-                className='nav-link active'
+                className='nav-link disabled'
                 aria-current='page'
                 to={"/dashboard"}>
                 <i className='icon'>
