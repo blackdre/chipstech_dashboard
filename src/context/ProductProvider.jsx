@@ -27,6 +27,21 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const getProductById = async (productId) => {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("id", productId)
+      .single();
+
+    if (error) {
+      toast.error("Error fetching product");
+      return null;
+    }
+
+    return data;
+  };
+
   const fetchBrands = async () => {
     const { data, error } = await supabase.from("brands").select("brand_name");
     if (!error) setBrands(data);
@@ -78,7 +93,7 @@ export const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ products, brands, categories, addProduct }}>
+      value={{ products, brands, categories, addProduct, getProductById }}>
       {children}
     </ProductsContext.Provider>
   );

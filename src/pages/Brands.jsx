@@ -24,13 +24,7 @@ const Brands = () => {
                   <div className='ms-3'>
                     <img src={brand.brand_img_url} width={100} />
                   </div>
-                  <a
-                    href='javascript:void(0);'
-                    className='btn btn-outline-primary rounded-circle btn-icon btn-sm p-2'>
-                    <span className='btn-inner'>
-                      <FaEdit />
-                    </span>
-                  </a>
+
                   <span className='m-1'></span>
                   <a
                     href='javascript:void(0);'

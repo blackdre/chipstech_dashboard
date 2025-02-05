@@ -3,7 +3,7 @@ import { useCategories } from "../context/CategoriesProvider";
 import CategoriesForm from "../components/ui/CategoriesForm";
 
 const Categories = () => {
-  const { categories } = useCategories();
+  const { categories, deleteCategory } = useCategories();
   return (
     <div className='row'>
       <div className='col-sm-12'>
@@ -28,16 +28,10 @@ const Categories = () => {
                             <h5>{category.name}</h5>
                             <p>{category.description}</p>
                           </div>
-                          <a
-                            href='javascript:void(0);'
-                            className='btn btn-outline-primary rounded-circle btn-icon btn-sm p-2'>
-                            <span className='btn-inner'>
-                              <FaEdit />
-                            </span>
-                          </a>
+
                           <span className='m-1'></span>
                           <a
-                            href='javascript:void(0);'
+                            onClick={() => deleteCategory(category.id)}
                             className='btn btn-outline-danger rounded-circle btn-icon btn-sm p-2'>
                             <span className='btn-inner'>
                               <FaTrashAlt />

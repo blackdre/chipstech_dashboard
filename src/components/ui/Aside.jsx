@@ -95,14 +95,6 @@ const Aside = () => {
                 <span className='item-name'>Brands</span>
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link ' to={"brand-form"}>
-                <i className='icon'>
-                  <BsBadgeTmFill />
-                </i>
-                <span className='item-name'>Brand Form</span>
-              </Link>
-            </li>
 
             <li>
               <hr className='hr-horizontal' />
