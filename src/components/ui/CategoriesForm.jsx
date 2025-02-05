@@ -1,16 +1,15 @@
 import { Button, Form } from "react-bootstrap";
 import { useCategories } from "../../context/CategoriesProvider";
+import { useState } from "react";
 
 const CategoriesForm = () => {
   const { addCategory } = useCategories();
-  const handleChange = (e) => {
-    console.log(e.target.value);
-  };
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const category = Object.fromEntries(formData);
-    addCategory(category);
+    addCategory(name, description);
   };
   return (
     <Form onSubmit={handleSubmit}>
@@ -20,7 +19,7 @@ const CategoriesForm = () => {
           type='text'
           placeholder='Category'
           onChange={(e) => {
-            handleChange(e);
+            setName(e.target.value);
           }}
         />
         <Form.Label>Category Details</Form.Label>
@@ -29,7 +28,7 @@ const CategoriesForm = () => {
           type='text'
           placeholder='Enter email'
           onChange={(e) => {
-            handleChange(e);
+            setDescription(e.target.value);
           }}
           rows={10}
         />

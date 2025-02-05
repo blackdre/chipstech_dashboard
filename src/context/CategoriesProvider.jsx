@@ -28,15 +28,15 @@ export const CategoriesProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const addCategory = async (category) => {
+  const addCategory = async (name, description) => {
     if (user) {
-      const { data, error } = await supabase
+      const { data: newCategory, error } = await supabase
         .from("categories")
-        .insert([category]);
+        .insert([{ name, description }]);
       if (error) {
         console.error("Error adding category:", error);
       } else {
-        setCategories([...categories, data[0]]);
+        setCategories([...categories, newCategory]);
       }
     }
   };
