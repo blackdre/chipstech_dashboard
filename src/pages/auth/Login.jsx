@@ -28,7 +28,7 @@ const Login = () => {
         error,
       } = await login(emailRef.current.value, passwordRef.current.value);
       if (error) toast.error(error.message); // Show error toast if login fails
-      if (user && session) navigate("/dashboard"); // Navigate to dashboard if login is successful
+      if (user && session) navigate("/"); // Navigate to dashboard if login is successful
     } catch (error) {
       toast.error("Email or Password Incorrect"); // Show error toast on catch
     }
